@@ -1,0 +1,72 @@
+.mobile {
+  position: fixed;
+  z-index: 90;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+}
+@media only screen and (min-width: 576px) {
+  .mobile {
+    display: none;
+  }
+}
+.mobile .nav {
+  width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 0;
+  padding: 0;
+  height: 65px;
+  display: flex;
+  justify-content: space-around;
+}
+.mobile .bloc-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0rem 1rem;
+}
+.mobile .bloc-icon img {
+  width: 30px;
+}
+.mobile .bloc-icon.active {
+  background-color: #cad1d1;
+}
+.mobile .subnav {
+  width: 100%;
+  display: block;
+  padding-top: 1rem;
+  border-top: 1px solid black;
+}
+.mobile .subnav span {
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.6rem;
+  padding: 1rem;
+}
+.mobile .subnav ul {
+  list-style-type: none;
+  margin: 0;
+}
+.mobile .subnav li {
+  margin: 1.5rem 0;
+}
+.mobile .subnav a {
+  padding-left: 2rem;
+  display: block;
+  text-decoration: none;
+  color: black;
+}
+.mobile .subnav img {
+  width: 30px;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+::before, ::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/*# sourceMappingURL=style.css.map */
