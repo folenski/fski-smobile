@@ -76,8 +76,11 @@ export class SubMobile {
 
   onClick = (e: Event): void => {
     e.preventDefault();
+
     if (!this._parentElement || !this._menudown) return;
+
     this.resetSMenu();
+
     this._parentElement.classList.toggle(this._options.actif);
     if (this._menudown.style.display == "none") {
       this._menudown.style.display = "block";
@@ -89,9 +92,9 @@ export class SubMobile {
   };
 
   /**
-   * Permet de gerer la logique d'un menu mobile avec des sous menu
+   * Permet de gerer la logique d'un menu mobile avec des sous-menus
    *
-   * @param {*} OPT, les options de la classes
+   * @param {*} OPT, les options de la classe
    * @returns
    */
   static async bind(options: OPT = SubMobile.defOptions) {

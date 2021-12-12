@@ -60,9 +60,9 @@ export class SubMobile {
         this._menudown.style.display = "none";
     }
     /**
-     * Permet de gerer la logique d'un menu mobile
+     * Permet de gerer la logique d'un menu mobile avec des sous-menus
      *
-     * @param {*} OPT, les options de la classes
+     * @param {*} OPT, les options de la classe
      * @returns
      */
     static async bind(options = SubMobile.defOptions) {

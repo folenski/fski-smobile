@@ -23,9 +23,9 @@ export declare class SubMobile {
     resetSMenu: () => void;
     onClick: (e: Event) => void;
     /**
-     * Permet de gerer la logique d'un menu mobile
+     * Permet de gerer la logique d'un menu mobile avec des sous-menus
      *
-     * @param {*} OPT, les options de la classes
+     * @param {*} OPT, les options de la classe
      * @returns
      */
     static bind(options?: OPT): Promise<(SubMobile | undefined)[]>;

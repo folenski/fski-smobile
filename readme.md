@@ -1,9 +1,8 @@
 # fski-smobile
 
-## Fonctionnalités
+## Fonctionnalité
 
-- Permet de gèrer les sous-mobiles dans le cadre d'un menu mobile
-- Le style css pour un menu 
+- Permet de gérer les sous-menu d'un menu mobile
 
 ## Nagivateurs testés
 
@@ -21,13 +20,12 @@ $ npm install fski-smobile
 
 ## Example
 
-Activation en js 
+Activation en javascript
 ```js
-import { SubMobile } from "fski-SubMobile";
-
+import { SubMobile } from "fski-smobile";
 SubMobile.bind();
 ```
-Html
+Exemple d'activation en html : la class subnav doit avoir un id lié avec un l'attribut data-menudown.
 
 ```html
     <div class="mobile">
