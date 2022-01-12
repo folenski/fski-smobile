@@ -22,7 +22,7 @@ $ npm install fski-smobile
 
 Activation en javascript
 ```js
-import { SubMobile } from "fski-smobile";
+import SubMobile from "fski-smobile";
 SubMobile.bind();
 ```
 Exemple d'activation en html : la class subnav doit avoir un id lié avec un l'attribut data-menudown.
@@ -40,6 +40,21 @@ Exemple d'activation en html : la class subnav doit avoir un id lié avec un l'a
           <a href="#" data-menudown="tag_menu_1">  <!-- reférence vers ke sous-menu-->
             <img src="img/follow_the_signs-24px.svg" />
           </a>
+        </div>
+```
+ou
+```html
+    <div class="mobile">
+        <div class="nav">
+        <div class="bloc-icon">
+          <a href="#" data-menudown="tag_menu_1">  <!-- reférence vers ke sous-menu-->
+            <img src="img/follow_the_signs-24px.svg" />
+          </a>
+          <!-- déclaration du sous-menu -->
+          <div id="tag_menu_1" class="subnav">
+              ...
+          </div>
+          <!-- menu princile -->
         </div>
 ```
 

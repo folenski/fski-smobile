@@ -8,9 +8,8 @@ declare type OPT = {
     menu: string;
     subMenu: string;
 };
-export declare class SubMobile {
+export default class SubMobile {
     private _element?;
-    private _parentElement?;
     private _elMobile?;
     private _menudown?;
     private _options;

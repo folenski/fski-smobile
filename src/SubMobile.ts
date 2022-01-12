@@ -10,9 +10,8 @@ type OPT = {
   subMenu: string;
 };
 
-export class SubMobile {
-  private _element?: HTMLElement;
-  private _parentElement?: HTMLElement | null;
+export default class SubMobile {
+  private _element?: HTMLElement | null;
   private _elMobile?: HTMLElement | null;
   private _menudown?: HTMLElement | null;
   private _options: OPT = SubMobile.defOptions;
@@ -28,18 +27,30 @@ export class SubMobile {
    * @param {OPT} opt
    */
   constructor(el: HTMLElement, opt: OPT) {
-    this._element = el;
     this._options = { ...SubMobile.defOptions, ...opt };
     if (!this._options.target) return;
 
+    // le menu mobile
     this._elMobile = document.querySelector(`.${this._options.menu}`);
+    if (!this._elMobile) return;
 
-    this._parentElement = el.parentElement;
+    // on selectionne le parent de l'element data-menudown
+    this._element = el.parentElement;
+    if (!this._element) return;
+
+    // on recherche si il y a une div subnav dans le lien car il nécessaire de la déplacer
+    const subnav = this._element.querySelector(`.${this._options.subMenu}`);
+    if (subnav) {
+      const newnav = subnav.parentNode?.removeChild(subnav);
+      if (newnav)
+        this._elMobile.insertBefore(newnav, this._elMobile.firstChild);
+    }
+
     this._menudown = document.getElementById(this._options.target);
 
     // on pose le click si le sous-menu est trouvé
     if (!this._menudown) {
-      console.log(
+      console.error(
         `SubMobile : Erreur id  -${this._options.target}- non trouvé`
       );
       return;
@@ -57,7 +68,7 @@ export class SubMobile {
     Array.from(
       this._elMobile.querySelectorAll(`.${this._options.actif}`),
       (element) => {
-        if (element !== this._parentElement)
+        if (element !== this._element)
           element.classList.remove(this._options.actif);
       }
     );
@@ -77,11 +88,11 @@ export class SubMobile {
   onClick = (e: Event): void => {
     e.preventDefault();
 
-    if (!this._parentElement || !this._menudown) return;
+    if (!this._element || !this._menudown) return;
 
     this.resetSMenu();
 
-    this._parentElement.classList.toggle(this._options.actif);
+    this._element.classList.toggle(this._options.actif);
     if (this._menudown.style.display == "none") {
       this._menudown.style.display = "block";
       this._menudown.style.opacity = "0";

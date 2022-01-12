@@ -2,12 +2,13 @@
  * @property {HTMLElement} element
  * @property {{target: string, active:string, menu: string, subMenu: string}} options
  */
-export class SubMobile {
+export default class SubMobile {
     /**
      * @param {HTMLElement} el, l'élement
      * @param {OPT} opt
      */
     constructor(el, opt) {
+        var _a;
         this._options = SubMobile.defOptions;
         // permet de reset les sous menus au préalable
         this.resetSMenu = () => {
@@ -15,7 +16,7 @@ export class SubMobile {
                 return;
             // on retire la classe active aux autres elements du menu
             Array.from(this._elMobile.querySelectorAll(`.${this._options.actif}`), (element) => {
-                if (element !== this._parentElement)
+                if (element !== this._element)
                     element.classList.remove(this._options.actif);
             });
             // on retire la classe active aux autres elements du menu
@@ -28,10 +29,10 @@ export class SubMobile {
         };
         this.onClick = (e) => {
             e.preventDefault();
-            if (!this._parentElement || !this._menudown)
+            if (!this._element || !this._menudown)
                 return;
             this.resetSMenu();
-            this._parentElement.classList.toggle(this._options.actif);
+            this._element.classList.toggle(this._options.actif);
             if (this._menudown.style.display == "none") {
                 this._menudown.style.display = "block";
                 this._menudown.style.opacity = "0";
@@ -43,16 +44,28 @@ export class SubMobile {
             else
                 this._menudown.style.display = "none";
         };
-        this._element = el;
         this._options = Object.assign(Object.assign({}, SubMobile.defOptions), opt);
         if (!this._options.target)
             return;
+        // le menu mobile
         this._elMobile = document.querySelector(`.${this._options.menu}`);
-        this._parentElement = el.parentElement;
+        if (!this._elMobile)
+            return;
+        // on selectionne le parent de l'element data-menudown
+        this._element = el.parentElement;
+        if (!this._element)
+            return;
+        // on recherche si il y a une div subnav dans le lien car il nécessaire de la déplacer
+        const subnav = this._element.querySelector(`.${this._options.subMenu}`);
+        if (subnav) {
+            const newnav = (_a = subnav.parentNode) === null || _a === void 0 ? void 0 : _a.removeChild(subnav);
+            if (newnav)
+                this._elMobile.insertBefore(newnav, this._elMobile.firstChild);
+        }
         this._menudown = document.getElementById(this._options.target);
         // on pose le click si le sous-menu est trouvé
         if (!this._menudown) {
-            console.log(`SubMobile : Erreur id  -${this._options.target}- non trouvé`);
+            console.error(`SubMobile : Erreur id  -${this._options.target}- non trouvé`);
             return;
         }
         el.addEventListener("click", this.onClick);

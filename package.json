@@ -1,6 +1,6 @@
 {
   "name": "fski-smobile",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Gestion de sous-menu pour le mobile",
   "main": "dist/SubMobile.js",
   "types": "dist/SubMobile.d.js",

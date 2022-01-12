@@ -2,12 +2,13 @@
   // dist/SubMobile.js
   var SubMobile = class {
     constructor(el, opt) {
+      var _a;
       this._options = SubMobile.defOptions;
       this.resetSMenu = () => {
         if (!this._elMobile)
           return;
         Array.from(this._elMobile.querySelectorAll(`.${this._options.actif}`), (element) => {
-          if (element !== this._parentElement)
+          if (element !== this._element)
             element.classList.remove(this._options.actif);
         });
         Array.from(this._elMobile.querySelectorAll(`.${this._options.subMenu}`), (element) => {
@@ -19,10 +20,10 @@
       };
       this.onClick = (e) => {
         e.preventDefault();
-        if (!this._parentElement || !this._menudown)
+        if (!this._element || !this._menudown)
           return;
         this.resetSMenu();
-        this._parentElement.classList.toggle(this._options.actif);
+        this._element.classList.toggle(this._options.actif);
         if (this._menudown.style.display == "none") {
           this._menudown.style.display = "block";
           this._menudown.style.opacity = "0";
@@ -33,15 +34,24 @@
         } else
           this._menudown.style.display = "none";
       };
-      this._element = el;
       this._options = Object.assign(Object.assign({}, SubMobile.defOptions), opt);
       if (!this._options.target)
         return;
       this._elMobile = document.querySelector(`.${this._options.menu}`);
-      this._parentElement = el.parentElement;
+      if (!this._elMobile)
+        return;
+      this._element = el.parentElement;
+      if (!this._element)
+        return;
+      const subnav = this._element.querySelector(`.${this._options.subMenu}`);
+      if (subnav) {
+        const newnav = (_a = subnav.parentNode) === null || _a === void 0 ? void 0 : _a.removeChild(subnav);
+        if (newnav)
+          this._elMobile.insertBefore(newnav, this._elMobile.firstChild);
+      }
       this._menudown = document.getElementById(this._options.target);
       if (!this._menudown) {
-        console.log(`SubMobile : Erreur id  -${this._options.target}- non trouv\xE9`);
+        console.error(`SubMobile : Erreur id  -${this._options.target}- non trouv\xE9`);
         return;
       }
       el.addEventListener("click", this.onClick);

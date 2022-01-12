@@ -1,7 +1,7 @@
 @import "variables";
 @import "menu-mobile.scss";
 
-::before, ::after {
+*, ::before, ::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
